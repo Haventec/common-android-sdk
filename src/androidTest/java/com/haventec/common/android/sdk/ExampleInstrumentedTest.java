@@ -1,11 +1,11 @@
-package com.haventec.common.client.android.sdk;
+package com.haventec.common.android.sdk;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.runner.AndroidJUnit4;
 
-import com.haventec.common.client.android.sdk.api.HaventecCommon;
-import com.haventec.common.client.android.sdk.api.exceptions.HaventecException;
+import com.haventec.common.android.sdk.api.HaventecCommon;
+import com.haventec.common.android.sdk.api.exceptions.HaventecCommonException;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -25,13 +25,13 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("com.haventec.common.client.android.sdk.test", appContext.getPackageName());
+        assertEquals("com.haventec.common.client.android.com.haventec.common.android.sdk.test", appContext.getPackageName());
 
         try {
             byte[] saltBytes = HaventecCommon.generateSalt();
             String hashPin = HaventecCommon.hashPin("1234", saltBytes);
             Assert.assertTrue(isValidPin(hashPin));
-        } catch (HaventecException e) {
+        } catch (HaventecCommonException e) {
             fail();
         }
     }

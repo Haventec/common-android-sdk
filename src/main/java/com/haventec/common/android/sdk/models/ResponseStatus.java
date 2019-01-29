@@ -1,4 +1,4 @@
-package com.haventec.common.client.android.sdk.models;
+package com.haventec.common.android.sdk.models;
 
 public class ResponseStatus {
     private String status;

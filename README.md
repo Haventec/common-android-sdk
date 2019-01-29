@@ -9,7 +9,7 @@ The bundled .aar file can be imported into any Android project via the standard 
 If using gradle, add the following dependencies:
 
 ```
-implementation "com.haventec.common.client.android.sdk:common-client-android-sdk:0.1@aar"
+implementation "com.haventec.common.android.sdk:common-client-android-sdk:0.1@aar"
 ```
 
 Ensure to use the latest published version of the SDK
@@ -21,7 +21,7 @@ so these SDK functions provide a convenient and consistent way of implementing t
 
 To use the SDK, import the following class and its dependencies:
 ```
-import com.haventec.common.client.android.sdk.api.HaventecCommon;
+import com.haventec.common.android.sdk.api.HaventecCommon;
 ```
 
 This class has the following methods:

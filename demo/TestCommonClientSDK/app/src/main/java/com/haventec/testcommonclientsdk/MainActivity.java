@@ -10,8 +10,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
-import com.haventec.common.client.android.sdk.api.HaventecCommon;
-import com.haventec.common.client.android.sdk.api.exceptions.HaventecException;
+import com.haventec.common.android.sdk.api.HaventecCommon;
+import com.haventec.common.android.sdk.api.exceptions.HaventecCommonException;
 import com.haventec.testcommonclientsdk.model.DeviceDetails;
 import com.haventec.testcommonclientsdk.model.UserDetails;
 
@@ -78,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
 
         try {
             salt = HaventecCommon.generateSalt();
-        } catch (HaventecException e) {
+        } catch (HaventecCommonException e) {
             e.printStackTrace();
         }
 
@@ -234,7 +234,7 @@ public class MainActivity extends AppCompatActivity {
 
                 }
             });
-        } catch (HaventecException e) {
+        } catch (HaventecCommonException e) {
             e.printStackTrace();
         }
     }

@@ -1,10 +1,10 @@
-package com.haventec.common.client.android.sdk.helpers;
+package com.haventec.common.android.sdk.helpers;
 
-import com.haventec.common.client.android.sdk.api.exceptions.CommonClientSdkError;
-import com.haventec.common.client.android.sdk.api.exceptions.HaventecException;
+import com.haventec.common.android.sdk.api.exceptions.CommonClientSdkError;
+import com.haventec.common.android.sdk.api.exceptions.HaventecCommonException;
+
 import org.apache.commons.codec.binary.Base64;
 import java.io.UnsupportedEncodingException;
-import java.nio.charset.StandardCharsets;
 import java.security.*;
 
 public class HashingHelper {
@@ -16,7 +16,7 @@ public class HashingHelper {
      *
      * @return
      */
-    public static byte[] generateRandomSaltBytes() throws HaventecException {
+    public static byte[] generateRandomSaltBytes() throws HaventecCommonException {
         // Generate a random salt
         SecureRandom random = new SecureRandom();
         byte[] salt = new byte[SALT_BYTE_SIZE];
@@ -24,7 +24,7 @@ public class HashingHelper {
 
         return salt;
     }
-    public static String generateRandomSalt() throws HaventecException {
+    public static String generateRandomSalt() throws HaventecCommonException {
         // Generate a random salt
         SecureRandom random = new SecureRandom();
         byte[] salt = new byte[SALT_BYTE_SIZE];
@@ -33,7 +33,7 @@ public class HashingHelper {
         try {
             return toBase64(salt);
         } catch (UnsupportedEncodingException e) {
-            throw new HaventecException(CommonClientSdkError.SALT_GEN_ERROR, e);
+            throw new HaventecCommonException(CommonClientSdkError.SALT_GEN_ERROR, e);
         }
     }
 
@@ -43,9 +43,9 @@ public class HashingHelper {
      * @param text
      * @param salt
      * @return
-     * @throws HaventecException
+     * @throws HaventecCommonException
      */
-    public static String createHash(String text, byte[] salt) throws HaventecException {
+    public static String createHash(String text, byte[] salt) throws HaventecCommonException {
         try {
             MessageDigest md = MessageDigest.getInstance(HASHING_ALGORITHM);
             md.update(salt);
@@ -54,7 +54,7 @@ public class HashingHelper {
             return toBase64(bytes);
         }
         catch (NoSuchAlgorithmException | UnsupportedEncodingException e){
-            throw new HaventecException(CommonClientSdkError.HASHING_ERROR, e);
+            throw new HaventecCommonException(CommonClientSdkError.HASHING_ERROR, e);
         }
     }
 

@@ -1,6 +1,7 @@
-package com.haventec.common.client.android.sdk.api;
+package com.haventec.common.android.sdk.api;
 
-import com.haventec.common.client.android.sdk.api.exceptions.HaventecException;
+import com.haventec.common.android.sdk.api.exceptions.HaventecCommonException;
+
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -12,7 +13,7 @@ public class HaventecCommonTest {
         byte[] salt = null;
         try {
             salt = HaventecCommon.generateSalt();
-        } catch (HaventecException e) {
+        } catch (HaventecCommonException e) {
             e.printStackTrace();
             Assert.fail();
         }
@@ -26,7 +27,7 @@ public class HaventecCommonTest {
         byte[] salt = null;
         try {
             salt = HaventecCommon.generateSalt();
-        } catch (HaventecException e) {
+        } catch (HaventecCommonException e) {
             e.printStackTrace();
             Assert.fail();
         }
@@ -34,7 +35,7 @@ public class HaventecCommonTest {
         String hash = null;
         try {
             hash = HaventecCommon.hashPin("1234", salt);
-        } catch (HaventecException e) {
+        } catch (HaventecCommonException e) {
             e.printStackTrace();
             Assert.fail();
         }
@@ -43,7 +44,7 @@ public class HaventecCommonTest {
         String hash2 = null;
         try {
             hash2 = HaventecCommon.hashPin("1234", salt);
-        } catch (HaventecException e) {
+        } catch (HaventecCommonException e) {
             e.printStackTrace();
             Assert.fail();
         }
@@ -53,7 +54,7 @@ public class HaventecCommonTest {
         String hash3 = null;
         try {
             hash3 = HaventecCommon.hashPin("1235", salt);
-        } catch (HaventecException e) {
+        } catch (HaventecCommonException e) {
             e.printStackTrace();
             Assert.fail();
         }

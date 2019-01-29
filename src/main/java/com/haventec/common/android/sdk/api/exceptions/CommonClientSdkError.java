@@ -1,6 +1,6 @@
-package com.haventec.common.client.android.sdk.api.exceptions;
+package com.haventec.common.android.sdk.api.exceptions;
 
-import com.haventec.common.client.android.sdk.models.HaventecError;
+import com.haventec.common.android.sdk.models.HaventecError;
 
 public enum CommonClientSdkError implements HaventecError {
     /**
