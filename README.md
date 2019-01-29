@@ -1,6 +1,6 @@
-# Haventec Common Client Android SDK
+# Haventec Common Android SDK
 
-A collection of functions for native Android apps to facilitate client-side interaction with Haventec backend services.
+A collection of functions for native Android apps to facilitate interaction with Haventec backend services.
 
 ## Installation
 
@@ -9,7 +9,7 @@ The bundled .aar file can be imported into any Android project via the standard 
 If using gradle, add the following dependencies:
 
 ```
-implementation "com.haventec.common.android.sdk:common-client-android-sdk:0.1@aar"
+implementation "com.haventec.common.android.sdk:common-android-sdk:0.1@aar"
 ```
 
 Ensure to use the latest published version of the SDK
@@ -28,7 +28,7 @@ This class has the following methods:
 ```
 public class HaventecCommon {
 
-    public static byte[] generateSalt() throws HaventecException {
+    public static byte[] generateSalt() throws HaventecCommonException {
     }
 
     public static String hashPin(String pin, byte[] salt) throws HaventecException {

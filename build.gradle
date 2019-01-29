@@ -59,8 +59,8 @@ task sourceJar(type: Jar) {
 publishing {
     publications {
         maven(MavenPublication) {
-            groupId 'com.haventec.common.android.com.haventec.common.android.sdk'
-            artifactId 'common-android-com.haventec.common.android.sdk'
+            groupId 'com.haventec.common.android.sdk'
+            artifactId 'common-android-sdk'
             version '0.1'
             artifact(sourceJar)
             artifact("$buildDir/outputs/aar/common-android-sdk-release.aar")
