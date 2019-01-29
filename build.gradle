@@ -68,7 +68,5 @@ publishing {
     }
     repositories {
         mavenLocal()
-        google()
-        jcenter()
     }
 }

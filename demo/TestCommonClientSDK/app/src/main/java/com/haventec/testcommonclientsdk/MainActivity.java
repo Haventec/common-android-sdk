@@ -10,7 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
-import com.haventec.common.client.android.sdk.api.Haventec;
+import com.haventec.common.client.android.sdk.api.HaventecCommon;
 import com.haventec.common.client.android.sdk.api.exceptions.HaventecException;
 import com.haventec.testcommonclientsdk.model.DeviceDetails;
 import com.haventec.testcommonclientsdk.model.UserDetails;
@@ -77,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
         dateCreatedView = findViewById(R.id.dateCreated);
 
         try {
-            salt = Haventec.generateSalt();
+            salt = HaventecCommon.generateSalt();
         } catch (HaventecException e) {
             e.printStackTrace();
         }
@@ -171,7 +171,7 @@ public class MainActivity extends AppCompatActivity {
     private void activateDevice() {
 
         try {
-            String hashedPin = Haventec.hashPin(pinCode, salt);
+            String hashedPin = HaventecCommon.hashPin(pinCode, salt);
 
             String jsonString = "{"
                     + "\"applicationUuid\": \"" + applicationUuid + "\","
