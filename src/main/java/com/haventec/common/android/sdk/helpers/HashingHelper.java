@@ -1,6 +1,6 @@
 package com.haventec.common.android.sdk.helpers;
 
-import com.haventec.common.android.sdk.api.exceptions.CommonClientSdkError;
+import com.haventec.common.android.sdk.api.exceptions.CommonError;
 import com.haventec.common.android.sdk.api.exceptions.HaventecCommonException;
 
 import org.apache.commons.codec.binary.Base64;
@@ -33,7 +33,7 @@ public class HashingHelper {
         try {
             return toBase64(salt);
         } catch (UnsupportedEncodingException e) {
-            throw new HaventecCommonException(CommonClientSdkError.SALT_GEN_ERROR, e);
+            throw new HaventecCommonException(CommonError.SALT_GEN_ERROR, e);
         }
     }
 
@@ -54,7 +54,7 @@ public class HashingHelper {
             return toBase64(bytes);
         }
         catch (NoSuchAlgorithmException | UnsupportedEncodingException e){
-            throw new HaventecCommonException(CommonClientSdkError.HASHING_ERROR, e);
+            throw new HaventecCommonException(CommonError.HASHING_ERROR, e);
         }
     }
 

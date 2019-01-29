@@ -2,7 +2,7 @@ package com.haventec.common.android.sdk.api.exceptions;
 
 import com.haventec.common.android.sdk.models.HaventecError;
 
-public enum CommonClientSdkError implements HaventecError {
+public enum CommonError implements HaventecError {
     /**
      * Encryption Errors
      */
@@ -25,7 +25,7 @@ public enum CommonClientSdkError implements HaventecError {
 
     private final String errorCode;
     private final String message;
-    CommonClientSdkError(String errorCode, String message) {
+    CommonError(String errorCode, String message) {
         this.errorCode = errorCode;
         this.message = message;
     }
