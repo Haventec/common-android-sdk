@@ -4,14 +4,14 @@ import com.haventec.common.client.android.sdk.api.exceptions.HaventecException;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class HaventecTest {
+public class HaventecCommonTest {
 
     @Test
     public void generateRandomSalt() {
 
         byte[] salt = null;
         try {
-            salt = Haventec.generateSalt();
+            salt = HaventecCommon.generateSalt();
         } catch (HaventecException e) {
             e.printStackTrace();
             Assert.fail();
@@ -25,7 +25,7 @@ public class HaventecTest {
 
         byte[] salt = null;
         try {
-            salt = Haventec.generateSalt();
+            salt = HaventecCommon.generateSalt();
         } catch (HaventecException e) {
             e.printStackTrace();
             Assert.fail();
@@ -33,7 +33,7 @@ public class HaventecTest {
 
         String hash = null;
         try {
-            hash = Haventec.hashPin("1234", salt);
+            hash = HaventecCommon.hashPin("1234", salt);
         } catch (HaventecException e) {
             e.printStackTrace();
             Assert.fail();
@@ -42,7 +42,7 @@ public class HaventecTest {
 
         String hash2 = null;
         try {
-            hash2 = Haventec.hashPin("1234", salt);
+            hash2 = HaventecCommon.hashPin("1234", salt);
         } catch (HaventecException e) {
             e.printStackTrace();
             Assert.fail();
@@ -52,7 +52,7 @@ public class HaventecTest {
 
         String hash3 = null;
         try {
-            hash3 = Haventec.hashPin("1235", salt);
+            hash3 = HaventecCommon.hashPin("1235", salt);
         } catch (HaventecException e) {
             e.printStackTrace();
             Assert.fail();

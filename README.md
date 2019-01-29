@@ -21,12 +21,12 @@ so these SDK functions provide a convenient and consistent way of implementing t
 
 To use the SDK, import the following class and its dependencies:
 ```
-import com.haventec.common.client.android.sdk.api.HaventecCommonClient;
+import com.haventec.common.client.android.sdk.api.HaventecCommon;
 ```
 
 This class has the following methods:
 ```
-public class HaventecCommonClient {
+public class HaventecCommon {
 
     public static byte[] generateSalt() throws HaventecException {
     }
@@ -39,7 +39,7 @@ public class HaventecCommonClient {
 To initialize, call the generateSalt() method, and retain the returned value. This is required for hashing the PIN to generate the same hash each time.
 If you don't retain the value, you won't be able to authenticate and you will need to invoke the Authenticate /forgot-pin and /reset-pin flow.
 ```
-byte[] saltBytes = HaventecCommonClient.generateSalt();
+byte[] saltBytes = HaventecCommon.generateSalt();
 ```
 
 To hash the PIN, call the hashPin method:

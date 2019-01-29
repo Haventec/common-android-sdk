@@ -3,7 +3,7 @@ package com.haventec.common.client.android.sdk.api;
 import com.haventec.common.client.android.sdk.api.exceptions.HaventecException;
 import com.haventec.common.client.android.sdk.helpers.HashingHelper;
 
-public class Haventec {
+public class HaventecCommon {
 
     public static byte[] generateSalt() throws HaventecException {
         return HashingHelper.generateRandomSaltBytes();
