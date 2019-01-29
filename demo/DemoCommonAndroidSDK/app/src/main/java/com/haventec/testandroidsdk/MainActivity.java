@@ -1,4 +1,4 @@
-package com.haventec.testcommonclientsdk;
+package com.haventec.testandroidsdk;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -12,8 +12,8 @@ import android.widget.TextView;
 
 import com.haventec.common.android.sdk.api.HaventecCommon;
 import com.haventec.common.android.sdk.api.exceptions.HaventecCommonException;
-import com.haventec.testcommonclientsdk.model.DeviceDetails;
-import com.haventec.testcommonclientsdk.model.UserDetails;
+import com.haventec.testandroidsdk.model.DeviceDetails;
+import com.haventec.testandroidsdk.model.UserDetails;
 
 import org.json.JSONException;
 import org.json.JSONObject;

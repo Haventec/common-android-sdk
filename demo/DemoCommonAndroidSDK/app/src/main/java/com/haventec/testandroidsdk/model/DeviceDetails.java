@@ -1,4 +1,4 @@
-package com.haventec.testcommonclientsdk.model;
+package com.haventec.testandroidsdk.model;
 
 import org.json.JSONException;
 import org.json.JSONObject;
