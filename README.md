@@ -44,7 +44,7 @@ byte[] saltBytes = HaventecCommon.generateSalt();
 
 To hash the PIN, call the hashPin method:
 ```
-String hashedPin = Haventec.hashPin(pinCode, salt);
+String hashedPin = HaventecCommon.hashPin(pinCode, salt);
 ```
 
 The returned value is a Base64-encoding of the SHA-512 hash of the pinCode, along with the salt previously generated.
