@@ -18,6 +18,8 @@ allprojects {
 }
 
 apply plugin: 'com.android.library'
+apply plugin: 'maven-publish'
+
 
 android {
     compileSdkVersion 28
@@ -48,8 +50,6 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 }
 
-
-apply plugin: 'maven-publish'
 
 task sourceJar(type: Jar) {
     from android.sourceSets.main.java.srcDirs
