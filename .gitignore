@@ -2,3 +2,5 @@
 *.iml
 libs
 **/.DS_Store
+.idea
+.gradle
