@@ -22,6 +22,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Properties;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -34,12 +35,12 @@ import okhttp3.Response;
 
 public class MainActivity extends AppCompatActivity {
 
-    private String applicationUuid = "c09dd8ef-823b-44e5-aa55-e48c39f1b32d";
-    private String apiKey = "53517059-8785-4288-87ed-d2002ca0b937";
-    private String haventecUsername = "justin";
-    private String haventecEmail = "justin.crosbie@haventec.com";
-    private String pinCode = "1234";
-    private String serverUrl = "https://api.haventec.com/authenticate/v1-2";
+    private String applicationUuid;
+    private String apiKey;
+    private String haventecUsername;
+    private String haventecEmail;
+    private String pinCode;
+    private String serverUrl;
 
     private byte[] salt;
     private String deviceUuid;
@@ -82,6 +83,21 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
+        Properties p = new Properties();
+        try {
+            p.load(getBaseContext().getAssets().open("app.properties"));
+
+            serverUrl = p.getProperty("serverUrl");
+            applicationUuid = p.getProperty("applicationUuid");
+            apiKey = p.getProperty("apiKey");
+            haventecUsername = p.getProperty("username");
+            haventecEmail = p.getProperty("email");
+            pinCode = p.getProperty("pinCode");
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         addDevice();
     }
 
@@ -119,8 +135,6 @@ public class MainActivity extends AppCompatActivity {
         MediaType JSON = MediaType.parse("application/json; charset=utf-8");
         RequestBody body = RequestBody.create(JSON, jsonString);
 
-        System.out.println(jsonString);
-
         OkHttpClient client = new OkHttpClient();
 
         Request request = new Request.Builder()
@@ -143,27 +157,18 @@ public class MainActivity extends AppCompatActivity {
                 if (!response.isSuccessful())
                     throw new IOException("Unexpected code " + response);
 
-                Headers responseHeaders = response.headers();
-                for (int i = 0; i < responseHeaders.size(); i++) {
-                    System.out.println(responseHeaders.name(i) + ": " + responseHeaders.value(i));
-                }
-
                 String jsonBodyStr = response.body().string();
-                System.out.println(jsonBodyStr);
 
                 try {
                     JSONObject reader = new JSONObject(jsonBodyStr);
                     deviceUuid = reader.getString("deviceUuid");
                     activationToken = reader.getString("activationToken");
 
-                    System.out.println("ActivationToken = " + activationToken);
                     activateDevice();
 
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-
-
             }
         });
     }
@@ -183,8 +188,6 @@ public class MainActivity extends AppCompatActivity {
 
             MediaType JSON = MediaType.parse("application/json; charset=utf-8");
             RequestBody body = RequestBody.create(JSON, jsonString);
-
-            System.out.println(jsonString);
 
             OkHttpClient client = new OkHttpClient();
 
@@ -206,15 +209,9 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onResponse(Call call, Response response) throws IOException {
                     String jsonBodyStr = response.body().string();
-                    System.out.println(jsonBodyStr);
 
                     if (!response.isSuccessful())
                         throw new IOException("Unexpected code " + response);
-
-                    Headers responseHeaders = response.headers();
-                    for (int i = 0; i < responseHeaders.size(); i++) {
-                        System.out.println(responseHeaders.name(i) + ": " + responseHeaders.value(i));
-                    }
 
                     try {
                         JSONObject reader = new JSONObject(jsonBodyStr);
@@ -223,15 +220,11 @@ public class MainActivity extends AppCompatActivity {
                         JSONObject tokenJsonObj = reader.getJSONObject("accessToken");
                         accessToken = tokenJsonObj.getString("token");
 
-                        System.out.println("accessToken = " + accessToken);
-
                         getCurrentUser();
 
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
-
-
                 }
             });
         } catch (HaventecCommonException e) {
@@ -263,15 +256,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 String jsonBodyStr = response.body().string();
-                System.out.println(jsonBodyStr);
 
                 if (!response.isSuccessful())
                     throw new IOException("Unexpected code " + response);
-
-                Headers responseHeaders = response.headers();
-                for (int i = 0; i < responseHeaders.size(); i++) {
-                    System.out.println(responseHeaders.name(i) + ": " + responseHeaders.value(i));
-                }
 
                 try {
                     JSONObject reader = new JSONObject(jsonBodyStr);
@@ -281,74 +268,18 @@ public class MainActivity extends AppCompatActivity {
 
                         @Override
                         public void run() {
-
-                        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
-                        titleView.setText("Hello, " + userDetails.getUsername());
-                        userUuidView.setText("Your userUuid is " + userDetails.getUserUuid());
-                        lastLoginView.setText("Your lastLogin is " + sdf.format(new Date(userDetails.getLastLogin())));
-                        dateCreatedView.setText("Your record was created on " + sdf.format(new Date(userDetails.getDateCreated())));
+                            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
+                            titleView.setText("Hello, " + userDetails.getUsername());
+                            userUuidView.setText("Your userUuid is " + userDetails.getUserUuid());
+                            lastLoginView.setText("Your lastLogin is " + sdf.format(new Date(userDetails.getLastLogin())));
+                            dateCreatedView.setText("Your record was created on " + sdf.format(new Date(userDetails.getDateCreated())));
                         }
                     });
-
-//                    getUserDevices();
 
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-
-
             }
         });
     }
-
-//    private void getUserDevices() {
-//
-//        OkHttpClient client = new OkHttpClient();
-//
-//        Request request = new Request.Builder()
-//                .addHeader("Content-type", "application/json")
-//                .addHeader("x-api-key", apiKey)
-//                .addHeader("Authorization", "Bearer " + accessToken)
-//                .url(serverUrl + "/user/" + userDetails.getUserUuid() + "/device")
-//                .get()
-//                .build();
-//
-//        okhttp3.Call call = client.newCall(request);
-//
-//        call.enqueue(new Callback() {
-//            @Override
-//            public void onFailure(Call call, IOException throwable) {
-//                throwable.printStackTrace();
-//            }
-//
-//            @Override
-//            public void onResponse(Call call, Response response) throws IOException {
-//                String jsonBodyStr = response.body().string();
-//                System.out.println(jsonBodyStr);
-//
-//                if (!response.isSuccessful())
-//                    throw new IOException("Unexpected code " + response);
-//
-//                Headers responseHeaders = response.headers();
-//                for (int i = 0; i < responseHeaders.size(); i++) {
-//                    System.out.println(responseHeaders.name(i) + ": " + responseHeaders.value(i));
-//                }
-//
-//                try {
-//                    JSONObject reader = new JSONObject(jsonBodyStr);
-//                    JSONArray devicesJSONArray = reader.getJSONArray("devices");
-//
-//                    devices = new ArrayList<>();
-//                    for ( int i=0; devicesJSONArray!=null && i<devicesJSONArray.length(); i++ ) {
-//                        devices.add(new DeviceDetails(devicesJSONArray.getJSONObject(i)));
-//                    }
-//
-//                } catch (JSONException e) {
-//                    e.printStackTrace();
-//                }
-//
-//
-//            }
-//        });
-//    }
 }
