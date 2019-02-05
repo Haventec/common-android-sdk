@@ -11,12 +11,7 @@ public class HaventecCommonTest {
     public void generateRandomSalt() {
 
         byte[] salt = null;
-        try {
             salt = HaventecCommon.generateSalt();
-        } catch (HaventecCommonException e) {
-            e.printStackTrace();
-            Assert.fail();
-        }
 
         Assert.assertEquals(128, salt.length);
     }
@@ -25,12 +20,7 @@ public class HaventecCommonTest {
     public void hashPin() {
 
         byte[] salt = null;
-        try {
-            salt = HaventecCommon.generateSalt();
-        } catch (HaventecCommonException e) {
-            e.printStackTrace();
-            Assert.fail();
-        }
+        salt = HaventecCommon.generateSalt();
 
         String hash = null;
         try {

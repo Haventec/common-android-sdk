@@ -25,10 +25,11 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("com.haventec.common.client.android.com.haventec.common.android.sdk.test", appContext.getPackageName());
+        assertEquals("com.haventec.common.android.sdk.test", appContext.getPackageName());
+
+        byte[] saltBytes = HaventecCommon.generateSalt();
 
         try {
-            byte[] saltBytes = HaventecCommon.generateSalt();
             String hashPin = HaventecCommon.hashPin("1234", saltBytes);
             Assert.assertTrue(isValidPin(hashPin));
         } catch (HaventecCommonException e) {

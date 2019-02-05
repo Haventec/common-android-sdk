@@ -14,35 +14,23 @@ public class HashingHelper {
     /**
      * It generates a random salt
      *
-     * @return
+     * @return byte[]
      */
-    public static byte[] generateRandomSaltBytes() throws HaventecCommonException {
-        // Generate a random salt
+    public static byte[] generateRandomSaltBytes() {
+
         SecureRandom random = new SecureRandom();
         byte[] salt = new byte[SALT_BYTE_SIZE];
         random.nextBytes(salt);
 
         return salt;
     }
-    public static String generateRandomSalt() throws HaventecCommonException {
-        // Generate a random salt
-        SecureRandom random = new SecureRandom();
-        byte[] salt = new byte[SALT_BYTE_SIZE];
-        random.nextBytes(salt);
-
-        try {
-            return toBase64(salt);
-        } catch (UnsupportedEncodingException e) {
-            throw new HaventecCommonException(CommonError.SALT_GEN_ERROR, e);
-        }
-    }
 
     /**
-     *  It create a Hash of the text
+     *  It creates a Hash of the text
      *
      * @param text
      * @param salt
-     * @return
+     * @return String
      * @throws HaventecCommonException
      */
     public static String createHash(String text, byte[] salt) throws HaventecCommonException {
@@ -58,12 +46,13 @@ public class HashingHelper {
         }
     }
 
-
-    private static byte[] fromBase64(String hex)
-            throws IllegalArgumentException, UnsupportedEncodingException {
-        return Base64.decodeBase64(hex.getBytes("UTF-8"));
-    }
-
+    /**
+     *  Encodes a byte array to a Base64-encoded String
+     *
+     * @param array
+     * @return String
+     * @throws HaventecCommonException
+     */
     private static String toBase64(byte[] array) throws UnsupportedEncodingException {
         return new String(Base64.encodeBase64(array), "UTF-8");
     }
