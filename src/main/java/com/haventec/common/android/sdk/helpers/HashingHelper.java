@@ -53,7 +53,28 @@ public class HashingHelper {
      * @return String
      * @throws HaventecCommonException
      */
-    private static String toBase64(byte[] array) throws UnsupportedEncodingException {
+    public static String toBase64(byte[] array) throws UnsupportedEncodingException {
+
+        if ( array == null || array.length < 1 ) {
+            return null;
+        }
+
         return new String(Base64.encodeBase64(array), "UTF-8");
     }
+
+    /**
+     *  Decodes a Base64-encoded String to byte array
+     *
+     * @param hex
+     * @return String
+     * @throws HaventecCommonException
+     */
+    public static byte[] fromBase64(String hex)
+            throws IllegalArgumentException, UnsupportedEncodingException {
+        if ( hex == null ) {
+            return null;
+        }
+        return Base64.decodeBase64(hex.getBytes("UTF-8"));
+    }
+
 }
