@@ -5,22 +5,27 @@ import com.haventec.common.android.sdk.api.exceptions.HaventecCommonException;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.HashSet;
+
 public class HaventecCommonTest {
 
     @Test
     public void generateRandomSalt() {
 
-        byte[] salt = null;
-            salt = HaventecCommon.generateSalt();
+        HashSet<String> saltGenerated = new HashSet<>();
 
-        Assert.assertEquals(128, salt.length);
+        for(int i=0; i< 1000; i++) {
+            byte[] salt = HaventecCommon.generateSalt();
+            Assert.assertEquals(128, salt.length);
+            Assert.assertFalse(saltGenerated.contains(salt.toString()));
+            saltGenerated.add(salt.toString());
+        }
     }
 
     @Test
-    public void hashPin() {
+    public void hashPin_SamePinSameSalt() {
 
-        byte[] salt = null;
-        salt = HaventecCommon.generateSalt();
+        byte[] salt = HaventecCommon.generateSalt();
 
         String hash = null;
         try {
@@ -31,25 +36,76 @@ public class HaventecCommonTest {
         }
         Assert.assertTrue(isValidPin(hash));
 
-        String hash2 = null;
-        try {
-            hash2 = HaventecCommon.hashPin("1234", salt);
-        } catch (HaventecCommonException e) {
-            e.printStackTrace();
-            Assert.fail();
+        for(int i=0; i<100; i++) {
+            String hash2 = null;
+            try {
+                hash2 = HaventecCommon.hashPin("1234", salt);
+            } catch (HaventecCommonException e) {
+                e.printStackTrace();
+                Assert.fail();
+            }
+            Assert.assertTrue(isValidPin(hash2));
+            Assert.assertTrue(hash.equals(hash2));
         }
-        Assert.assertTrue(isValidPin(hash2));
-        Assert.assertTrue(hash.equals(hash2));
+    }
 
-        String hash3 = null;
+    /**
+     * Same salt with different PIN should give us completely different hashedPin
+     */
+    @Test
+    public void hashPin_SameSaltDifferentPin() {
+
+        byte[] salt = HaventecCommon.generateSalt();
+
+        String hash = null;
         try {
-            hash3 = HaventecCommon.hashPin("1235", salt);
+            hash = HaventecCommon.hashPin("1234", salt);
         } catch (HaventecCommonException e) {
             e.printStackTrace();
             Assert.fail();
         }
-        Assert.assertTrue(isValidPin(hash3));
-        Assert.assertTrue(!hash.equals(hash3));
+        Assert.assertTrue(isValidPin(hash));
+
+        for(int i=0; i<100; i++) {
+            String hash2 = null;
+            try {
+                hash2 = HaventecCommon.hashPin("1235", salt);
+            } catch (HaventecCommonException e) {
+                e.printStackTrace();
+                Assert.fail();
+            }
+            Assert.assertTrue(isValidPin(hash2));
+            Assert.assertTrue(!hash.equals(hash2));
+        }
+    }
+
+    /**
+     * Diffenret salt with same PIN should give us completely different hashedPin
+     */
+    @Test
+    public void hashPin_DifferentSaltSamePin() {
+        String commonPin = "2233";
+
+        String hash = null;
+        try {
+            hash = HaventecCommon.hashPin(commonPin, HaventecCommon.generateSalt());
+        } catch (HaventecCommonException e) {
+            e.printStackTrace();
+            Assert.fail();
+        }
+        Assert.assertTrue(isValidPin(hash));
+
+        for(int i=0; i<100; i++) {
+            String hash2 = null;
+            try {
+                hash2 = HaventecCommon.hashPin(commonPin, HaventecCommon.generateSalt());
+            } catch (HaventecCommonException e) {
+                e.printStackTrace();
+                Assert.fail();
+            }
+            Assert.assertTrue(isValidPin(hash2));
+            Assert.assertTrue(!hash.equals(hash2));
+        }
     }
 
     private static final Integer SHA512HASH_BASE64_LEN = 88;
@@ -61,7 +117,7 @@ public class HaventecCommonTest {
      * @param pin The pin to validate
      * @return true if it meets the requirements
      */
-    public static boolean isValidPin(String pin) {
+    private static boolean isValidPin(String pin) {
         return (pin != null && isValidBase64(pin) && pin.length() == SHA512HASH_BASE64_LEN);
     }
 
@@ -71,7 +127,7 @@ public class HaventecCommonTest {
      * @param strBase64 The incoming string
      * @return true is the string is the correct format
      */
-    public static boolean isValidBase64(String strBase64) {
+    private static boolean isValidBase64(String strBase64) {
         return (strBase64 != null && strBase64.matches(VALID_BASE64) && (strBase64.length() % 4 == 0));
     }
 }
