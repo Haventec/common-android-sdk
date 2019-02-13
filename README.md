@@ -1,13 +1,13 @@
 # Haventec Common Android SDK
 
-A collection of functions for native Android apps used in other Haventec SDKs. This library is not meant to be used directly by a third party application.
+A collection of functions used by the android Haventec SDKs. This library is not meant to be used directly by a third party applications.
 
 Please use instead [authenticate-android-sdk](https://github.com/Haventec/authenticate-android-sdk) or
 [sanctum-android-sdk](https://github.com/Haventec/sanctum-android-sdk)
 
 
 ## Development
-To build, run the following:
+To build and publish it locally, run the following:
 ```
 ./gradlew clean build publish
 ```
