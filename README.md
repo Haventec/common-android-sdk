@@ -2,7 +2,7 @@
 
 A collection of functions for native Android apps used in other Haventec SDKs. This library is not meant to be used directly by a third party application.
 
-Please use [authenticate-android-sdk](https://github.com/Haventec/authenticate-android-sdk) or
+Please use instead [authenticate-android-sdk](https://github.com/Haventec/authenticate-android-sdk) or
 [sanctum-android-sdk](https://github.com/Haventec/sanctum-android-sdk)
 
 
