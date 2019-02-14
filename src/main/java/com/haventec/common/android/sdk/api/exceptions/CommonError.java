@@ -3,8 +3,6 @@ package com.haventec.common.android.sdk.api.exceptions;
 import com.haventec.common.android.sdk.models.HaventecError;
 
 public enum CommonError implements HaventecError {
-
-
     /**
      * Secret Hashing Errors
      */
@@ -13,13 +11,14 @@ public enum CommonError implements HaventecError {
 
     private final String errorCode;
     private final String message;
+
     CommonError(String errorCode, String message) {
         this.errorCode = errorCode;
         this.message = message;
     }
 
     /**
-     * It prints the AutenticateError in a specific format.
+     * It prints the error in a specific format.
      *
      * @return
      */

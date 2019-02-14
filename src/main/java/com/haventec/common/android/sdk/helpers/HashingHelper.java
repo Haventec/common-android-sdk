@@ -33,7 +33,7 @@ public class HashingHelper {
      * @return String
      * @throws HaventecCommonException
      */
-    public static String createHash(String text, byte[] salt) throws HaventecCommonException {
+    public static String createHash(String text, byte[] salt) {
         try {
             MessageDigest md = MessageDigest.getInstance(HASHING_ALGORITHM);
             md.update(salt);
