@@ -34,6 +34,11 @@ public class HashingHelper {
      * @throws HaventecCommonException
      */
     public static String createHash(String text, byte[] salt) {
+
+        if ( text == null || salt == null ) {
+            return null;
+        }
+
         try {
             MessageDigest md = MessageDigest.getInstance(HASHING_ALGORITHM);
             md.update(salt);
