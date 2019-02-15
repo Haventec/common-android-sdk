@@ -23,6 +23,7 @@ implementation "com.haventec.common.android.sdk:common-android-sdk:0.1@aar"
 ```
 
 Ensure to use the latest published version of the SDK
+[ ![Download](https://api.bintray.com/packages/haventec/maven/common-android-sdk/images/download.svg?version=0.1) ](https://bintray.com/haventec/maven/common-android-sdk/0.1/link)
 
 ## Usage
 
