@@ -19,7 +19,7 @@ The bundled .aar file is imported by other Haventec SDKs
 If using gradle, add the following dependencies:
 
 ```
-compile 'com.haventec.common.android.sdk:common-android-sdk:0.1'
+implementation 'com.haventec.common.android.sdk:common-android-sdk:0.1'
 ```
 
 Ensure to use the latest published version of the SDK
