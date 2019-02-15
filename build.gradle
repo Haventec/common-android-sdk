@@ -3,9 +3,14 @@ buildscript {
         google()
         mavenCentral()
         jcenter()
+        maven {
+            url  "https://haventec.bintray.com/maven"
+        }
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.3.1'
+        classpath 'com.github.dcendents:android-maven-gradle-plugin:1.4.1'
+        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7.3'
     }
 }
 
@@ -19,6 +24,8 @@ allprojects {
 
 apply plugin: 'com.android.library'
 apply plugin: 'maven-publish'
+apply plugin: 'com.github.dcendents.android-maven'
+apply plugin: 'com.jfrog.bintray'
 
 
 android {
@@ -71,3 +78,30 @@ publishing {
         mavenLocal()
     }
 }
+
+ext {
+    organisation = 'haventec'
+    bintrayRepo = 'maven'
+    bintrayName = 'common-android-sdk'
+
+    publishedGroupId = 'com.haventec.common.android.sdk'
+    libraryName = 'common-android-sdk'
+    artifact = 'common-android-sdk'
+
+    libraryDescription = 'A collection of functions used by the android Haventec SDKs.'
+
+    siteUrl = 'https://github.com/Haventec/common-android-sdk'
+    gitUrl = 'https://github.com/Haventec/common-android-sdk.git'
+
+    libraryVersion = '0.1'
+
+    developerId = 'Haventec'
+    developerName = 'Haventec'
+    developerEmail = 'info@haventec.com'
+
+    licenseName = 'MIT'
+    licenseUrl = 'https://tldrlegal.com/license/mit-license'
+    allLicenses = ["MIT"]
+}
+
+apply from: 'bintray.gradle'
