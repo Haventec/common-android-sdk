@@ -5,13 +5,6 @@ A collection of functions used by the android Haventec SDKs. This library is not
 Please use instead [authenticate-android-sdk](https://github.com/Haventec/authenticate-android-sdk) or
 [sanctum-android-sdk](https://github.com/Haventec/sanctum-android-sdk)
 
-
-## Development
-To build and publish it locally, run the following:
-```
-./gradlew clean build publish
-```
-
 ## Installation
 
 The bundled .aar file is imported by other Haventec SDKs
@@ -19,11 +12,11 @@ The bundled .aar file is imported by other Haventec SDKs
 If using gradle, add the following dependencies:
 
 ```
-implementation 'com.haventec.common.android.sdk:common-android-sdk:0.1'
+implementation 'com.haventec.common.android.sdk:common-android-sdk:0.2'
 ```
 
 Ensure to use the latest published version of the SDK
-[ ![Download](https://api.bintray.com/packages/haventec/maven/common-android-sdk/images/download.svg?version=0.1) ](https://bintray.com/haventec/maven/common-android-sdk/0.1/link)
+[ ![Download](https://api.bintray.com/packages/haventec/maven/common-android-sdk/images/download.svg?version=0.2) ](https://bintray.com/haventec/maven/common-android-sdk/0.2/link)
 
 ## Usage
 
@@ -34,11 +27,30 @@ It provides the following methods:
 * generateSalt(): It generates a random salt.
 * hashPin(String pin, byte[] salt): It creates a Hash of the PIN. The returned value is a Base64-encoding of the SHA-512 hash of the PIN.
 
+## Development
+To build and publish it locally, run the following:
+```
+./gradlew clean build publish
+```
 
-## Contributors
+## Publish to bintray
+1. Make sure you have an account at bintray with enough privileges at the organisation Haventec
 
- - Justin Crosbie
+2. Configure your personal file local.properties with your username and the API Key of bintray
+```
+bintray.user=<your-username>
+bintray.apikey=<your-bintray-api-key>
+```
 
+3. Run the following two gradle commands
+```
+clean install
+``` 
+
+```
+bintrayUpload
+```
+ 
 ## License
 
 This code is available under the MIT license. A copy of the license can be found in the LICENSE file included with the distribution.
