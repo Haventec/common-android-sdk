@@ -20,7 +20,7 @@ public enum CommonError implements HaventecError {
     /**
      * It prints the error in a specific format.
      *
-     * @return
+     * @return human readable String with information about the Error
      */
     public String toString() {
         return " ErrorCode=" + this.getErrorCode() + ", Message=" +this.getMessage();

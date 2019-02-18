@@ -28,10 +28,10 @@ public class HashingHelper {
     /**
      *  It creates a Hash of the text
      *
-     * @param text
-     * @param salt
-     * @return String
-     * @throws HaventecCommonException
+     * @param text String to hash with the salt
+     * @param salt Salt to hash the text
+     * @return String The hashed text
+     * @throws HaventecCommonException If there is any issue generating the hash
      */
     public static String createHash(String text, byte[] salt) {
         try {
@@ -49,9 +49,12 @@ public class HashingHelper {
     /**
      *  Encodes a byte array to a Base64-encoded String
      *
-     * @param array
-     * @return String
-     * @throws HaventecCommonException
+     * @param array byte array to parse to String
+     *
+     * @return String the parsed byte array
+     *
+     * @throws UnsupportedEncodingException
+     *         If UTF-8 is not supported
      */
     public static String toBase64(byte[] array) throws UnsupportedEncodingException {
 
@@ -63,14 +66,14 @@ public class HashingHelper {
     }
 
     /**
-     *  Decodes a Base64-encoded String to byte array
+     * Decodes a Base64-encoded String to byte array
      *
-     * @param hex
-     * @return String
-     * @throws HaventecCommonException
+     * @param hex String in Base64-encoded format
+     * @return byte array with the content of the parameter <code>hex</code>
+     * @throws UnsupportedEncodingException
+     *         If UTF-8 is not supported
      */
-    public static byte[] fromBase64(String hex)
-            throws IllegalArgumentException, UnsupportedEncodingException {
+    public static byte[] fromBase64(String hex) throws UnsupportedEncodingException {
         if ( hex == null ) {
             return null;
         }

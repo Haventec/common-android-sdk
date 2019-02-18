@@ -68,7 +68,7 @@ publishing {
             artifactId 'common-android-sdk'
             version '0.2'
             artifact(sourceJar)
-            artifact("$buildDir/outputs/aar/common-android-sdk-release.aar")
+            artifact("$buildDir/outputs/aar/common-android-sdk-0.2.aar")
         }
     }
     repositories {
@@ -90,7 +90,7 @@ ext {
     siteUrl = 'https://github.com/Haventec/common-android-sdk'
     gitUrl = 'https://github.com/Haventec/common-android-sdk.git'
 
-    libraryVersion = '0.1'
+    libraryVersion = '0.2'
 
     developerId = 'Haventec'
     developerName = 'Haventec'
