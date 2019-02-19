@@ -45,12 +45,16 @@ android {
         }
     }
 
+    testOptions {
+        unitTests.returnDefaultValues = true
+    }
 }
 
 dependencies {
     api fileTree(include: ['*.jar'], dir: 'libs')
     api 'commons-codec:commons-codec:1.9'
     testImplementation 'junit:junit:4.12'
+    testImplementation 'org.mockito:mockito-core:2.24.5'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 }

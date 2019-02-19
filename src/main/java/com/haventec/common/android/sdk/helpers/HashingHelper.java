@@ -18,9 +18,7 @@ public class HashingHelper {
      */
     public static byte[] generateRandomSaltBytes() {
 
-        // Need to enable this to implement the security patch
-        // But has some work to do to mock out android.os.Process for the tests
-        // PRNGFixes.apply();
+        PRNGFixes.apply();
 
         SecureRandom random = new SecureRandom();
         byte[] salt = new byte[SALT_BYTE_SIZE];
