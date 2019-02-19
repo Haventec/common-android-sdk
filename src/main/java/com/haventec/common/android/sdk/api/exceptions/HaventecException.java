@@ -12,10 +12,6 @@ import com.haventec.common.android.sdk.models.HaventecError;
 public abstract class HaventecException extends RuntimeException {
     protected String errorCode;
 
-    public HaventecException() {
-        super();
-    }
-
     public HaventecException(HaventecError haventecError, Throwable throwable) {
         super(haventecError.getMessage() + ": " + throwable.getMessage(), throwable);
         this.errorCode = haventecError.getErrorCode();
