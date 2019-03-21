@@ -18,8 +18,6 @@ public class HashingHelper {
      */
     public static byte[] generateRandomSaltBytes() {
 
-        PRNGFixes.apply();
-
         SecureRandom random = new SecureRandom();
         byte[] salt = new byte[SALT_BYTE_SIZE];
         random.nextBytes(salt);
