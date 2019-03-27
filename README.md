@@ -5,6 +5,10 @@ A collection of functions used by the android Haventec SDKs. This library is not
 Please use instead [authenticate-android-sdk](https://github.com/Haventec/authenticate-android-sdk) or
 [sanctum-android-sdk](https://github.com/Haventec/sanctum-android-sdk)
 
+## Requirements
+
+Android 4.4 or later
+
 ## Installation
 
 The bundled .aar file is imported by other Haventec SDKs
