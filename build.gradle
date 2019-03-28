@@ -5,8 +5,8 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.3.1'
-        classpath 'com.github.dcendents:android-maven-gradle-plugin:1.4.1'
+        classpath 'com.android.tools.build:gradle:3.3.2'
+        classpath 'com.github.dcendents:android-maven-gradle-plugin:2.1'
         classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7.3'
     }
 }
@@ -17,6 +17,8 @@ allprojects {
         jcenter()
         mavenLocal()
     }
+
+    tasks.withType(Javadoc).all { enabled = false }
 }
 
 apply plugin: 'com.android.library'
@@ -29,7 +31,7 @@ android {
     compileSdkVersion 28
 
     defaultConfig {
-        minSdkVersion 15
+        minSdkVersion 19
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
@@ -45,16 +47,19 @@ android {
         }
     }
 
+    testOptions {
+        unitTests.returnDefaultValues = true
+    }
 }
 
 dependencies {
     api fileTree(include: ['*.jar'], dir: 'libs')
-    api 'commons-codec:commons-codec:1.3'
+    api 'commons-codec:commons-codec:1.11'
     testImplementation 'junit:junit:4.12'
+    testImplementation 'org.mockito:mockito-core:2.24.5'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 }
-
 
 task sourceJar(type: Jar) {
     from android.sourceSets.main.java.srcDirs
@@ -66,9 +71,9 @@ publishing {
         maven(MavenPublication) {
             groupId 'com.haventec.common.android.sdk'
             artifactId 'common-android-sdk'
-            version '0.1'
+            version '0.3'
             artifact(sourceJar)
-            artifact("$buildDir/outputs/aar/common-android-sdk-release.aar")
+            artifact("$buildDir/outputs/aar/common-android-sdk-0.3.aar")
         }
     }
     repositories {
@@ -90,7 +95,7 @@ ext {
     siteUrl = 'https://github.com/Haventec/common-android-sdk'
     gitUrl = 'https://github.com/Haventec/common-android-sdk.git'
 
-    libraryVersion = '0.1'
+    libraryVersion = '0.3'
 
     developerId = 'Haventec'
     developerName = 'Haventec'
