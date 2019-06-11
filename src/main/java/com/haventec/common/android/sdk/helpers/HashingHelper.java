@@ -9,7 +9,7 @@ import java.security.*;
 
 public class HashingHelper {
     public static final String HASHING_ALGORITHM = "SHA-512";
-    public static final int SALT_BYTE_SIZE = 128;
+    public static final int SALT_BYTE_SIZE = 64;
 
     /**
      * It generates a random salt
