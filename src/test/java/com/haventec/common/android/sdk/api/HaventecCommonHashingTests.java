@@ -16,7 +16,7 @@ public class HaventecCommonHashingTests {
 
         for(int i=0; i< 1000; i++) {
             byte[] salt = HaventecCommon.generateSalt();
-            Assert.assertEquals(128, salt.length);
+            Assert.assertEquals(64, salt.length);
             Assert.assertFalse(saltGenerated.contains(salt.toString()));
             saltGenerated.add(salt.toString());
         }
